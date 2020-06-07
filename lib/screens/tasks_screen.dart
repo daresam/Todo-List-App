@@ -1,9 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoey/models/task.dart';
 import 'package:todoey/widgets/add_task_screen.dart';
 import 'package:todoey/widgets/task_list.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(name: 'Buy Milk'),
+    Task(name: 'Buy Bread'),
+    Task(name: 'Buy Pizza'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +26,14 @@ class TasksScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(),
+            builder: (context) => AddTaskScreen(
+              (newTaskTitle) {
+                setState(() {
+                  tasks.add(Task(name: newTaskTitle));
+                  Navigator.pop(context);
+                });
+              },
+            ),
           );
         },
       ),
@@ -66,7 +85,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskList(),
+              child: TaskList(tasks),
             ),
           ),
         ],
