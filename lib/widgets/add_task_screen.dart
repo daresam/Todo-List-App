@@ -1,17 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task_data.dart';
 
 class AddTaskScreen extends StatefulWidget {
-  final Function addTaskTitleCallBack;
-  AddTaskScreen(this.addTaskTitleCallBack);
-
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
   String newTaskTitle;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -55,7 +53,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                widget.addTaskTitleCallBack(newTaskTitle);
+                print(newTaskTitle);
+                Provider.of<TaskData>(context, listen: false)
+                    .addTask(newTaskTitle);
+                Navigator.pop(context);
               },
             ),
           ],
