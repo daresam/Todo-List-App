@@ -1,6 +1,6 @@
-# todoey
+# todo app
 
-A new Flutter application.
+A Todo List App Built with Flutter using Provider.
 
 ## Getting Started
 
