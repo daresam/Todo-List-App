@@ -14,14 +14,17 @@ class _TaskListState extends State<TaskList> {
     return Consumer<TaskData>(builder: (context, taskData, child) {
       return ListView.builder(
           itemBuilder: (context, index) {
+            final task = taskData.tasks[index];
             return TaskTile(
-                taskTitle: taskData.tasks[index].name,
-                isChecked: taskData.tasks[index].isDone,
-                checkBoxCallback: (checkBoxState) {
-                  setState(() {
-                    taskData.tasks[index].toggleDone();
-                  });
-                });
+              taskTitle: task.name,
+              isChecked: task.isDone,
+              checkBoxCallback: (checkBoxState) {
+                taskData.updateTask(task);
+              },
+              longPressedCallback: () {
+                taskData.deleteTask(task);
+              },
+            );
           },
           itemCount: taskData.taskCount);
     });

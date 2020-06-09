@@ -53,7 +53,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                print(newTaskTitle);
                 Provider.of<TaskData>(context, listen: false)
                     .addTask(newTaskTitle);
                 Navigator.pop(context);
